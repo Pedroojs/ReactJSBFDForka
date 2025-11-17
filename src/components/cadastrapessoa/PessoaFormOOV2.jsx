@@ -56,6 +56,9 @@ export default function PessoaFormOOV2() {
 
         if (tipoParam === "PF") {
           valores.cpf = pessoa.cpf;
+          valores.dataNascimento = pessoa.dataNascimento
+            ? dayjs(pessoa.dataNascimento)
+            : null;
           valores.titulo = pessoa.titulo || { numero: "", zona: "", secao: "" };
         } else {
           const ieObj = pessoa.ie || {};
@@ -113,6 +116,14 @@ export default function PessoaFormOOV2() {
         pf.setEmail(values.email);
         pf.setCPF(values.cpf);
         pf.setEndereco(end);
+
+        if (values.dataNascimento) {
+          const dataNasc =
+            values.dataNascimento && typeof values.dataNascimento.format === "function"
+              ? values.dataNascimento.format("YYYY-MM-DD")
+              : values.dataNascimento || "";
+          pf.setDataNascimento(dataNasc);
+        }
 
         if (values.titulo) {
           const t = new Titulo();
