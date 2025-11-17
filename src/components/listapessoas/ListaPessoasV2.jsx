@@ -55,6 +55,19 @@ export default function ListaPessoas() {
       key: "doc",
       width: 200,
     },
+    ...(tipo === "PF" ? [{
+      title: "Data de Nascimento",
+      dataIndex: "dataNascimento",
+      key: "dataNascimento",
+      render: (text) => text ? new Date(text).toLocaleDateString("pt-BR") : "-",
+      width: 150,
+    }] : [{
+      title: "Data de Registro",
+      dataIndex: ["ie", "dataRegistro"],
+      key: "dataRegistro",
+      render: (text) => text ? new Date(text).toLocaleDateString("pt-BR") : "-",
+      width: 150,
+    }]),
     {
       title: "Ações",
       key: "acoes",
