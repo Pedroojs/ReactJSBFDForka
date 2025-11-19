@@ -52,9 +52,23 @@ export default function VisualizaPessoa() {
           <Descriptions.Item label="E-mail">{pessoa.email}</Descriptions.Item>
 
           {tipo === "PF" ? (
-            <Descriptions.Item label="CPF">{pessoa.cpf}</Descriptions.Item>
+            <>
+              <Descriptions.Item label="CPF">{pessoa.cpf}</Descriptions.Item>
+              <Descriptions.Item label="Data de Nascimento">
+                {pessoa.dataNascimento
+                  ? new Date(pessoa.dataNascimento).toLocaleDateString("pt-BR")
+                  : "Não informado"}
+              </Descriptions.Item>
+            </>
           ) : (
-            <Descriptions.Item label="CNPJ">{pessoa.cnpj}</Descriptions.Item>
+            <>
+              <Descriptions.Item label="CNPJ">{pessoa.cnpj}</Descriptions.Item>
+              <Descriptions.Item label="Data de Registro">
+                {pessoa.ie?.dataRegistro
+                  ? new Date(pessoa.ie.dataRegistro).toLocaleDateString("pt-BR")
+                  : "Não informado"}
+              </Descriptions.Item>
+            </>
           )}
 
           {/* Endereço */}
@@ -87,7 +101,7 @@ export default function VisualizaPessoa() {
             <>
               <Descriptions.Item label="Inscrição Estadual">
                 {pessoa.ie?.numero
-                  ? `Nº ${pessoa.ie.numero} - ${pessoa.ie.estado} (${pessoa.ie.dataRegistro})`
+                  ? `Nº ${pessoa.ie.numero} - ${pessoa.ie.estado}`
                   : "Não informado"}
               </Descriptions.Item>
             </>
